@@ -1,7 +1,7 @@
- var path = require('path');
+var path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const handlebars  = require('express-handlebars');
+const handlebars = require('express-handlebars');
 
 const app = express();
 const port = 3000;
@@ -11,24 +11,29 @@ const route = require('./routers');
 //set static link
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+);
 app.use(express.json());
 
 //Template engine
-app.engine('hbs', handlebars({
-    extname: '.hbs'
-}));
+app.engine(
+    'hbs',
+    handlebars({
+                extname: '.hbs',
+    }),
+);
 app.set('view engine', 'hbs');
 
 //HTTP Logger
 app.use(morgan('combined'));
-app.set('views', path.join(__dirname, 'resources/views'));
+                app.set('views', path.join(__dirname, 'resources/views'));
 
 //Routes init
-route(app);
+        route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-})
+    console.log(`Example app listening at http://localhost:${port}`);
+});
