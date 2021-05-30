@@ -22,17 +22,17 @@ app.use(express.json());
 app.engine(
     'hbs',
     handlebars({
-                extname: '.hbs',
+        extname: '.hbs',
     }),
 );
 app.set('view engine', 'hbs');
 
 //HTTP Logger
 app.use(morgan('combined'));
-                app.set('views', path.join(__dirname, 'resources/views'));
+    app.set('views', path.join(__dirname, 'resources/views'));
 
 //Routes init
-            route(app);
+     route(app);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
