@@ -1,1 +1,21 @@
-<h1>HOME PAGE</h1>
+<div class="mt-4 mb-4">
+    <div class="row">
+        {{#each products}}
+            <div class="col-sm-6 col-lg-4 card-product-item">
+                <div class="card" style="width: 18rem;">
+                    <a href="/products/{{this.slug}}">
+                        <img class="card-img-top" src="{{this.imageUrl}}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <a href="/products/{{this.slug}}">
+                            <h5 class="card-title">{{this.name}}</h5>
+                        </a>
+                        <p class="card-text">{{this.description}}</p>
+                        <a href="#" class="btn btn-primary">Xem sản phẩm</a>
+                    </div>                              
+                </div>
+            </div>
+        {{/each}}
+        
+    </div>
+</div>
