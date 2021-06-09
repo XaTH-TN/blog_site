@@ -1,0 +1,69 @@
+<div class="mt-4 mb-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col" colspan="2">Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td>
+                        <a href="/admin/products/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                        <a href="#" data-toggle="modal" class="btn btn-link"  data-id="{{this._id}}" data-target="#delete-product-modal">Xóa</a>
+                    </td>
+                </tr>
+                <tr>
+            {{/each}}
+
+        </tbody>
+        </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắn chắn muốn xóa?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="btn-delete-product">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-product-form" method="POST"></form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var productId;
+    var btnDeleteProduct = document.getElementById('btn-delete-product');
+    var deleteProductForm = document.forms["delete-product-form"];
+
+    $('#delete-product-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      productId = button.data('id') 
+    })
+
+    btnDeleteProduct.onclick = function() {
+      deleteProductForm.action = "/admin/products/" + productId +"?_method=DELETE";
+      deleteProductForm.submit();
+    }
+  });
+</script>

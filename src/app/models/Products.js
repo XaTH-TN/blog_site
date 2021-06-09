@@ -14,7 +14,7 @@ const Products = new Schema(
         status: { type: String, maxLength: 10 },
         imageUrl: { type: String, maxLength: 255 },
         slug: { type: String, slug: 'name', unique: true },
-        videoId: { type: String, maxLength: 255 },
+        videoId: { type: String, maxLength: 255, require: true },
     },
     {
         timestamps: true,
