@@ -1,16 +1,30 @@
 const Products = require('../models/Products');
-const { multipleMongooseToObject } = require('../../util/mongoose');
+const News = require('../models/News');
+
+const {
+    multipleMongooseToObject,
+    mongooseToObject,
+} = require('../../util/mongoose');
 class SiteController {
-    index(req, res, next) {
+    async index(req, res, next) {
         //Promise
-        Products.find({})
-            .then((products) =>
-                res.render('home', {
-                    products: multipleMongooseToObject(products),
-                }),
-            )
+        // const postTop = News.findById({ _id: 1});
+        debugger;
+        const news = await News.find({})
+            .sort({ createdAt: -1 })
+            .limit(3)
+            .then((news) => {
+                return multipleMongooseToObject(news);
+            })
             .catch(next);
-        // res.render('home');
+        const newTop = news[0];
+
+        let responseObj = {
+            postMore: news,
+            postTop: newTop,
+            postNew: news,
+        };
+        res.render('home', responseObj);
     }
 
     search(req, res) {

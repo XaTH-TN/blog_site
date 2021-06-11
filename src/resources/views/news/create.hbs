@@ -1,0 +1,27 @@
+<div class="mt-4">
+    <form method="POST" action="/admin/news/store">
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="descriptionInput">Description</label>
+            <textarea name="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="videoIdInput">Video Id</label>
+            <input type="text" name="videoId" class="form-control" id="videoIdInput" placeholder="Enter video id">
+        </div>
+        <div class="form-group">
+            <label for="imageUrlInput">Image name</label>
+            <input type="text" name="imageUrl" class="form-control" id="imageUrlInput" placeholder="Enter Image name">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        CKEDITOR.replace( 'description' );
+    }); 
+</script>
